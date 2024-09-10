@@ -1,7 +1,7 @@
 // src/features/auth/services/authSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { loginApi } from "./authApi";
-import { setToken, removeToken } from "../../../utils/tokenUtils"; // Externalize token handling
+import { setToken, removeToken, getToken } from "../../../utils/tokenUtils"; // Import getToken utility
 
 // Define AuthState interface
 interface AuthState {
@@ -10,8 +10,9 @@ interface AuthState {
   error: string | null;
 }
 
+// Set token from localStorage if available
 const initialState: AuthState = {
-  token: null,
+  token: getToken(), // Rehydrate from localStorage
   loading: false,
   error: null,
 };
@@ -26,7 +27,6 @@ export const login = createAsyncThunk<
     const response = await loginApi(credentials);
     return response.token; // Assumes API returns a token field
   } catch (error: any) {
-    // Capture any API errors and reject with a meaningful message
     return rejectWithValue(error.response?.data?.message || "Login failed");
   }
 });
@@ -38,7 +38,7 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.token = null;
-      removeToken(); // Use the token utility to remove the token
+      removeToken(); // Remove token from localStorage
     },
   },
   extraReducers: (builder) => {
@@ -50,7 +50,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action: PayloadAction<string>) => {
         state.token = action.payload;
         state.loading = false;
-        setToken(action.payload); // Save the token using utility function
+        setToken(action.payload); // Save token to localStorage
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
@@ -59,6 +59,5 @@ const authSlice = createSlice({
   },
 });
 
-// Export the actions and reducer
 export const { logout } = authSlice.actions;
 export default authSlice.reducer;

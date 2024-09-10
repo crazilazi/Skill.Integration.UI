@@ -3,8 +3,8 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { IconContext } from "react-icons";
 import { Link } from "react-router-dom";
-import { SidebarData } from "./sidebardata";
-import "./navbar.css";
+import { SidebarData } from "./SidebarData";
+import "./Navbar.css";
 
 function Navbar() {
   const [sidebar, setSidebar] = React.useState(false);
@@ -44,26 +44,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-// const { Header } = Layout;
-
-// const Navbar: React.FC = () => {
-//   return (
-//     <Header className="navbar">
-//       <div className="logo" />
-//       <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
-//         <Menu.Item key="1" icon={<HomeOutlined />}>
-//           Home
-//         </Menu.Item>
-//         <Menu.Item key="2" icon={<UserOutlined />}>
-//           Products
-//         </Menu.Item>
-//         <Menu.Item key="3" icon={<SettingOutlined />}>
-//           Reports
-//         </Menu.Item>
-//       </Menu>
-//     </Header>
-//   );
-// };
-
-//export default Navbar;
