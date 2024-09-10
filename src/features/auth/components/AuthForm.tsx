@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Typography } from "antd";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store";
-import { login } from "../features/auth/services/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom"; // Import useNavigate
+import { AppDispatch, RootState } from "../../../store";
+import { login } from "../services/authSlice";
 import "./AuthForm.css"; // Custom CSS for additional styling
 
 const { Title } = Typography;
@@ -11,9 +12,25 @@ const AuthForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch: AppDispatch = useDispatch(); // correctly typed dispatch
+  const navigate = useNavigate(); // Get navigate function
 
-  const handleSubmit = () => {
-    dispatch(login({ username, password })); // Dispatch the thunk
+  const token = useSelector((state: RootState) => state.auth.token);
+
+  // If the token exists, redirect to the home page
+  if (token) {
+    return <Navigate to="/" />;
+  }
+
+  const handleSubmit = async () => {
+    try {
+      // Dispatch the login action and wait for it to complete
+      await dispatch(login({ username, password })).unwrap();
+      // Redirect to the home page or another route after successful login
+      navigate("/");
+    } catch (err) {
+      console.error("Login failed:", err);
+      // Handle login error (optional: show an error message)
+    }
   };
 
   return (
