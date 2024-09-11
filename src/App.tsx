@@ -1,6 +1,7 @@
 // src/App.tsx
-import "./App.css";
-import Navbar from "./components/Navbar";
+import "./app.css";
+import AppLayout from "./components/menubar/menulayout";
+import "antd/dist/reset.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./routes/Routes";
 import { FC } from "react";
@@ -11,7 +12,7 @@ const App: FC = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Navbar />
+        <AppLayout />
         <AppRoutes />
       </Router>
     </Provider>
