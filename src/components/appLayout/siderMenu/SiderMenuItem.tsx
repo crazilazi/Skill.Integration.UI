@@ -6,6 +6,15 @@ export interface SiderMenuItem {
 }
 
 export function MenuLayoutStyles() {
+  const headerStyle: React.CSSProperties = {
+    textAlign: "center",
+    color: "#fff",
+    height: 64,
+    paddingInline: 48,
+    lineHeight: "64px",
+    backgroundColor: "#d9d9d9",
+  };
+
   const contentStyle: React.CSSProperties = {
     textAlign: "center",
     minHeight: 120,
@@ -32,5 +41,5 @@ export function MenuLayoutStyles() {
     maxWidth: "calc(100% - 8px)",
     minHeight: "100vh",
   };
-  return { layoutStyle, siderStyle, contentStyle, footerStyle };
+  return { layoutStyle, headerStyle, siderStyle, contentStyle, footerStyle };
 }

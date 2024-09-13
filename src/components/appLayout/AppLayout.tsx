@@ -5,7 +5,7 @@ import { siderMenuData } from "./siderMenu/SiderMenuData";
 import { Link } from "react-router-dom";
 import { Footer } from "antd/es/layout/layout";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import AppRoutes from "../../routes/Routes";
+import HeaderWithLogout from "./Header";
 
 const { Sider, Content, Header } = Layout;
 
@@ -25,6 +25,7 @@ const renderMenuItems = (items: SiderMenuItem[]) => {
 
 const {
   layoutStyle,
+  headerStyle,
   siderStyle,
   contentStyle,
   footerStyle,
@@ -36,6 +37,7 @@ const {
     maxWidth: string;
     minHeight: string;
   };
+  headerStyle: React.CSSProperties;
   siderStyle: React.CSSProperties;
   contentStyle: React.CSSProperties;
   footerStyle: React.CSSProperties;
@@ -92,6 +94,7 @@ const AppLayout: React.FC = () => {
           </div>
         </Sider>
         <Layout>
+          <HeaderWithLogout></HeaderWithLogout>
           <Content style={contentStyle}></Content>
           <Footer style={footerStyle}>@Bengaluru 2024</Footer>
         </Layout>
