@@ -1,4 +1,3 @@
-// src/services/httpClient.ts
 import axios from "axios";
 import { getToken } from "../utils/tokenUtils";
 

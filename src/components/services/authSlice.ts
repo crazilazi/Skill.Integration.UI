@@ -1,7 +1,7 @@
 // src/features/auth/services/authSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { loginApi } from "./authApi";
-import { setToken, removeToken, getToken } from "../../../utils/tokenUtils"; // Import getToken utility
+import { setToken, removeToken, getToken } from "../../utils/tokenUtils"; // Import getToken utility
 
 // Define AuthState interface
 interface AuthState {
@@ -25,6 +25,7 @@ export const login = createAsyncThunk<
 >("auth/login", async (credentials, { rejectWithValue }) => {
   try {
     const response = await loginApi(credentials);
+    console.log(response);
     return response.token; // Assumes API returns a token field
   } catch (error: any) {
     return rejectWithValue(error.response?.data?.message || "Login failed");

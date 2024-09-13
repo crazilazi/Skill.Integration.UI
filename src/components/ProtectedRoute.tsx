@@ -1,4 +1,3 @@
-// src/components/ProtectedRoute.tsx
 import { FC, ReactElement } from "react";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";

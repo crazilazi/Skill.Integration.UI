@@ -1,4 +1,5 @@
-import httpClient from "../../../services/httpClient";
+// absolute path: src/components/services/authApi.ts
+import httpClient from "../../services/httpClient";
 
 export const loginApi = async (credentials: {
   username: string;

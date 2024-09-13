@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { Form, Input, Button, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom"; // Import useNavigate
-import { AppDispatch, RootState } from "../../../store";
+import { AppDispatch, RootState } from "../../store";
 import { login } from "../services/authSlice";
-import "./AuthForm.css"; // Custom CSS for additional styling
+import "./Login.css";
 
 const { Title } = Typography;
 
 const AuthForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   const dispatch: AppDispatch = useDispatch(); // correctly typed dispatch
   const navigate = useNavigate(); // Get navigate function
 

@@ -1,4 +1,4 @@
-import { MenuItem } from "./menuitem";
+import { SiderMenuItem } from "./SiderMenuItem";
 import {
   AppstoreAddOutlined,
   UserOutlined,
@@ -7,41 +7,41 @@ import {
   FundProjectionScreenOutlined,
 } from "@ant-design/icons";
 
-export const menuData: MenuItem[] = [
+export const siderMenuData: SiderMenuItem[] = [
   {
-    key: "1",
+    key: "Dashboard",
     title: "Dashboard",
     icon: <AppstoreAddOutlined />,
   },
   {
-    key: "sub1",
+    key: "Settings",
     title: "Settings",
     icon: <SettingOutlined />,
     children: [
       {
-        key: "2",
+        key: "Plans",
         title: "Plans",
         icon: <FundProjectionScreenOutlined />,
       },
       {
-        key: "3",
+        key: "Skills",
         title: "Skills",
         icon: <RedditOutlined />,
         children: [
           {
-            key: "7",
+            key: "SkillsDomain",
             title: "Domain",
           },
           {
-            key: "8",
+            key: "IndustryKnowledge",
             title: "Industry Knowledge",
           },
           {
-            key: "9",
+            key: "Languages",
             title: "Languages",
           },
           {
-            key: "10",
+            key: "SoftSkills",
             title: "Soft Skills",
           },
         ],
@@ -49,20 +49,20 @@ export const menuData: MenuItem[] = [
     ],
   },
   {
-    key: "sub2",
+    key: "Roles",
     title: "Roles",
     icon: <UserOutlined />,
     children: [
       {
-        key: "4",
+        key: "Inbox",
         title: "Inbox",
       },
       {
-        key: "5",
+        key: "Sent",
         title: "Sent",
       },
       {
-        key: "6",
+        key: "Drafts",
         title: "Drafts",
       },
     ],

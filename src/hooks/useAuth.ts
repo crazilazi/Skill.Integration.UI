@@ -1,7 +1,6 @@
-// src/hooks/useAuth.ts
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../store"; // Import AppDispatch for typing
-import { login, logout } from "../features/auth/services/authSlice";
+import { login, logout } from "../components/services/authSlice";
 
 // Define the return type of the useAuth hook
 interface UseAuthReturnType {
