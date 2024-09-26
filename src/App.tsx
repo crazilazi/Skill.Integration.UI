@@ -1,22 +1,55 @@
 import { FC } from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 import "antd/dist/reset.css";
-import AppRoutes from "./routes/Routes";
 import store from "./store";
 import "./App.css";
-import AppLayout from "components/appLayout/AppLayout";
-import ProtectedRoute from "components/ProtectedRoute";
+import {
+  AppLayout,
+  Dashboards,
+  Login,
+  NotFound,
+  ProtectedRoute,
+  SkillsDomain,
+} from "components";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/" element={<AppLayout />}>
+        <Route
+          index
+          path="/Dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboards />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/SkillsDomain"
+          element={
+            <ProtectedRoute>
+              <SkillsDomain />
+            </ProtectedRoute>
+          }
+        />
+      </Route>
+      <Route path="/login" element={<Login />} />
+      <Route path="/*" element={<NotFound />} />
+    </>
+  )
+);
 
 const App: FC = () => {
   return (
     <Provider store={store}>
-      <Router>
-        <ProtectedRoute>
-          <AppLayout />
-        </ProtectedRoute>
-        <AppRoutes />
-      </Router>
+      <RouterProvider router={router} />
     </Provider>
   );
 };
