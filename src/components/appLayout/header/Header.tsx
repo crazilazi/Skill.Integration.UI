@@ -3,8 +3,8 @@ import { Layout, Button } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../services/authSlice";
 import "./Header.css";
+import { logout } from "components";
 
 const { Header } = Layout;
 
