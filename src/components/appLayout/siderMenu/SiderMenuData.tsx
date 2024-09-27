@@ -41,8 +41,8 @@ export const siderMenuData: SiderMenuItem[] = [
             title: "Languages",
           },
           {
-            key: "SoftSkills",
-            title: "Soft Skills",
+            key: "SkillMapping",
+            title: "Skill Mapping",
           },
         ],
       },
