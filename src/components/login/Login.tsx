@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, Navigate, useNavigate } from "react-router-dom"; // Import useNavigate
 import { AppDispatch, RootState } from "../../store";
 import { login } from "../services/authSlice";
 import "./Login.css";
@@ -19,6 +19,7 @@ const AuthForm: React.FC = () => {
 
   // If the token exists, redirect to the home page
   if (token) {
+    console.log("Token exists, redirecting to home page");
     return <Navigate to="/" />;
   }
 
@@ -73,6 +74,9 @@ const AuthForm: React.FC = () => {
           </Button>
         </Form.Item>
       </Form>
+      <p>
+        Don't have an account? <Link to="/register">Register here</Link>
+      </p>
     </div>
   );
 };

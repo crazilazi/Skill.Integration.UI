@@ -1,6 +1,6 @@
 // src/features/auth/services/authSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { loginApi } from "./authApi";
+import { loginApi, registerApi } from "./authApi";
 import { setToken, removeToken, getToken } from "../../utils/tokenUtils"; // Import getToken utility
 
 // Define AuthState interface
@@ -29,6 +29,21 @@ export const login = createAsyncThunk<
     return response.token; // Assumes API returns a token field
   } catch (error: any) {
     return rejectWithValue(error.response?.data?.message || "Login failed");
+  }
+});
+
+// Define return types and payload for login thunk
+export const register = createAsyncThunk<
+  string, // Return type (the token)
+  { username: string; password: string }, // Argument type
+  { rejectValue: string } // Rejection type
+>("auth/register", async (credentials, { rejectWithValue }) => {
+  try {
+    const response = await registerApi(credentials);
+    console.log(response);
+    return response.token; // Assumes API returns a token field
+  } catch (error: any) {
+    return rejectWithValue(error.response?.data?.message || "Register failed");
   }
 });
 
