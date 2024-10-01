@@ -67,4 +67,9 @@ export const siderMenuData: SiderMenuItem[] = [
       },
     ],
   },
+  {
+    key: "Resource",
+    title: "Resource",
+    icon: <AppstoreAddOutlined />,
+  },
 ];
