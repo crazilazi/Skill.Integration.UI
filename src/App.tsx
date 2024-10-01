@@ -18,11 +18,19 @@ import {
   Register,
   SkillsDomain,
 } from "components";
+import Resource from "components/resource/Resource";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <AppLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route
           index
           path="/Dashboard"
@@ -37,6 +45,15 @@ const router = createBrowserRouter(
           element={
             <ProtectedRoute>
               <SkillsDomain />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          index
+          path="/Resource"
+          element={
+            <ProtectedRoute>
+              <Resource />
             </ProtectedRoute>
           }
         />
