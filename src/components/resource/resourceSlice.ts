@@ -1,6 +1,6 @@
 // employeeSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllResources } from "./resourceApi";
+import { getAllResources, getResourceRecommendSkills } from "./resourceApi";
 
 export interface Resource {
   id: string;
@@ -9,14 +9,21 @@ export interface Resource {
   skills: string[];
 }
 
+export interface IRecommendedSkill {
+  skill: string;
+  score: number;
+}
+
 interface ResourceState {
   resources: Resource[];
+  recommendedSkills: Record<string, IRecommendedSkill[]>;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: ResourceState = {
   resources: [],
+  recommendedSkills: {},
   loading: false,
   error: null,
 };
@@ -27,6 +34,19 @@ export const fetchResources = createAsyncThunk("resource/fetch", async () => {
   return response.data;
 });
 
+// Async thunk to get resource recommend skills
+export const fetchResourceRecommendSkills = createAsyncThunk(
+  "resource/fetchRecommendSkills",
+  async (id: string) => {
+    const response = await getResourceRecommendSkills(id);
+    // Return both the employeeId and recommended skills as the payload
+    return {
+      id, // The ID of the selected resource
+      recommendedSkills: response.data, // The recommended skills for that employee
+    };
+  }
+);
+
 const resourceSlice = createSlice({
   name: "resource",
   initialState,
@@ -35,17 +55,26 @@ const resourceSlice = createSlice({
     builder
       .addCase(fetchResources.pending, (state) => {
         state.loading = true;
-        console.log(state);
       })
       .addCase(fetchResources.fulfilled, (state, action) => {
         state.resources = action.payload;
         state.loading = false;
-        console.log(action);
       })
       .addCase(fetchResources.rejected, (state, action) => {
         state.error = action.error.message || "Something went wrong";
         state.loading = false;
-        console.log(action);
+      })
+      .addCase(fetchResourceRecommendSkills.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchResourceRecommendSkills.fulfilled, (state, action) => {
+        const { id, recommendedSkills } = action.payload;
+        state.recommendedSkills[id] = recommendedSkills;
+        state.loading = false;
+      })
+      .addCase(fetchResourceRecommendSkills.rejected, (state, action) => {
+        state.error = action.error.message || "Something went wrong";
+        state.loading = false;
       });
   },
 });

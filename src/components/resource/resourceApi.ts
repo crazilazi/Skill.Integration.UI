@@ -4,6 +4,11 @@ import httpClient from "../../services/httpClient";
 //get all resources
 export const getAllResources = async () => {
   const response = await httpClient.get("/employee");
-  console.log(response.data);
+  return response;
+};
+
+// get resource recommend skills
+export const getResourceRecommendSkills = async (id: string) => {
+  const response = await httpClient.get(`/SkillRecommendation/recommend/${id}`);
   return response;
 };
